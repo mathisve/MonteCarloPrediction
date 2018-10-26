@@ -7,6 +7,7 @@ n = 365 #number of days we want to simulate.
 csvFile = 'market-price.csv'
 currentPrice = 5471.82
 f = 5
+change = 0
 
 def getTrueBitcoinPriceChange():
 	truePrice = []
@@ -30,11 +31,15 @@ def MCsimulation(currentPrice):
 		currentSim.append(currentPrice)
 	plt.plot(currentSim)
 
+def plot():
+	plt.title("Possible BTC price with avrg {}% daily change".format((change*100)*f))
+	plt.show()
 
 change = round(getTrueBitcoinPriceChange(),6)
 print("Average % change in the past year:", change)
 for i in range(100):
+	if((i+1)%10==0):
+		print("Simulation n: ",i+1)
 	MCsimulation(currentPrice)
 
-plt.title("Possible BTC price with avrg {}% daily change".format((change*100)*f))
-plt.show()
+plot()
