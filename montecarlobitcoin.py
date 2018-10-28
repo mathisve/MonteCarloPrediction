@@ -42,7 +42,7 @@ def MCsimulation(currentPrice,s,x):
 	currentSim = []
 	for i in range(n*f):
 		if(v):
-			print("Simulation {} of {}. Day {} of {}".format(s,x,i+1,n*f))
+			print("Simulation {} of {}. Day {} of {}".format(s+1,x,i+1,n*f))
 		currentPrice = currentPrice + currentPrice * (random.choice([(change * -1), change]))
 		currentSim.append(currentPrice)
 	plt.plot(currentSim)
