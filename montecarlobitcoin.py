@@ -49,6 +49,9 @@ def MCsimulation(currentPrice,s,x):
 
 def plot():
 	plt.title("Possible Asset price with avrg {}% daily change".format((change*f)*100))
+	plt.xlabel("Time in days/{}".format(f))
+	plt.ylabel("Price in $")
+	plt.grid(color='black', linestyle='--', linewidth=.5, alpha=.3)
 	plt.show()
 
 change = round(getTrueBitcoinPriceChange(),6)
