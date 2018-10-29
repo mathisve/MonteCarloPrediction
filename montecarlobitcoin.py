@@ -29,13 +29,16 @@ except:
 	v = False
 
 def getBitcoinPrice():
-	data = requests.get('https://api.coindesk.com/v1/bpi/currentprice.json').json()
 	try:
+		data = requests.get('https://api.coindesk.com/v1/bpi/currentprice.json').json()
 		price = data['bpi']['USD']['rate_float']
 	except:
-		if(v == True): print("Coindesk API price look up failed")
-		print("Please enter current bitcoin price: ", end='', flush=True)
-		price = float(input())
+		if(v == True): 
+			print("Coindesk API price look up failed")
+			print("Please enter current bitcoin price: ", end='', flush=True)
+			price = float(input())
+		else:
+			price = 6000
 
 	return price
 
