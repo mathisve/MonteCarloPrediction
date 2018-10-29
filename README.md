@@ -1,5 +1,5 @@
 # MonteCarloPrediction
-Predict value of asset using [Monte Carlo Algorithm.](https://en.wikipedia.org/wiki/Monte_Carlo_algorithm)
+Displays and helps analyze the value of an asset using the [Monte Carlo Algorithm.](https://en.wikipedia.org/wiki/Monte_Carlo_algorithm)
 
 ## Images
 This code can produce images and data like this:
