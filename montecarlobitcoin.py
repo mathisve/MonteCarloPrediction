@@ -6,11 +6,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 n = 365*1 #number of days/years we want to simulate. 
-x = 20 #number of diffirent simulations
+x = 25 #number of diffirent simulations
 f = 24 #factor, increases or decreases density
 
 csvFile = 'CSV/28_10_2018/market-price.csv'
-currentPrice = 5471.82
+currentPrice = 6403.35
 
 savePlot = True #Save plot as image in working dir, True by default
 imgName = "" #leave blank for time
@@ -45,7 +45,7 @@ def getTrueBitcoinPriceChange():
 			avrgPercentualChange = abs(sum(truePercentualChangeArr)/len(truePercentualChangeArr))		
 	return (avrgPercentualChange/f)
 
-def MCsimulation(currentPrice,s,x):
+def simulation(currentPrice,s,x):
 	currentSim = []
 	for i in range(n*f):
 		if(v):
@@ -59,11 +59,12 @@ def plot():
 	plt.xlabel("Time in days/{}".format(f))
 	plt.ylabel("Price in $")
 	plt.grid(color='black', linestyle='--', linewidth=.5, alpha=.3)
+
 	if(savePlot):
 		if(imgName == ""):
-			plt.savefig(str(time.strftime("%b_%d_%Y__[%H-%M-%S]")) + imgFormat)
+			plt.savefig("IMG/" + str(time.strftime("%b_%d_%Y__[%H-%M-%S]")) + imgFormat)
 		else:
-			plt.savefig(imgName + imgFormat)
+			plt.savefig("IMG/" + imgName + imgFormat)
 	plt.show()
 
 
@@ -73,7 +74,7 @@ print("Average % change in the past year:", round((change*f)*100,3))
 for i in range(x):
 	if((i+1)%10==0):
 		print("Simulation n: ",i+1)
-	MCsimulation(currentPrice,i,x)
+	simulation(currentPrice,i,x)
 
 
 plot()
