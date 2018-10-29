@@ -29,22 +29,22 @@ try:
 except:
 	v = False
 
-def getBitcoinPrice():
+def getCurrencyPrice():
 	try:
 		data = requests.get('https://api.coindesk.com/v1/bpi/currentprice.json').json()
 		price = data['bpi']['USD']['rate_float']
 	except:
 		if(v): 
 			print("Coindesk API price look up failed")
-			print("Please enter current bitcoin price: ", end='', flush=True)
+			print("Please enter current currency price: ", end='', flush=True)
 			price = float(input())
 		else:
 			price = 6000
 	return price
 
-currentPrice = getBitcoinPrice()
+currentPrice = getCurrncyPrice()
 
-def getTrueBitcoinPriceChange():
+def getTrueCurrencyPriceChange():
 	truePrice = []
 	truePercentualChangeArr = []
 	print("Loading CSV file: ", csvFile)
@@ -71,9 +71,9 @@ def simulation(currentPrice,s,x):
 	plt.plot(currentSim)
 
 def plot():
-	plt.title("Possible Asset price with avrg {}% daily change".format(round((change*f)*100,3)))
+	plt.title("Possible Asset value with avrg {}% daily change".format(round((change*f)*100,3)))
 	plt.xlabel("Time in days/{}".format(f))
-	plt.ylabel("Price in $")
+	plt.ylabel("Value in $")
 	plt.grid(color='black', linestyle='--', linewidth=.5, alpha=.3)
 
 	if(savePlot):
@@ -85,7 +85,7 @@ def plot():
 
 
 if(dailyChange == 0):
-	change = round(getTrueBitcoinPriceChange(),6)
+	change = round(getTrueCurrencyPriceChange(),6)
 else:
 	change = dailyChange/2400
 
