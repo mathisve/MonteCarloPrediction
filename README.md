@@ -9,4 +9,4 @@ This code can produce images and data like this:
 
 
 ### How it works
-Link to Youtube video where I explain everything: https://www.youtube.com/watch?v=DYRHRY4tEx4&ab_channel=MathisVanEetvelde
+I have a [Youtube video](https://www.youtube.com/watch?v=DYRHRY4tEx4&ab_channel=MathisVanEetvelde) explaining how it works. Unfortunately it is rather outdated but the concept stayed the same.
