@@ -4,17 +4,17 @@ import random
 import csv
 import numpy as np
 import matplotlib.pyplot as plt
+import requests
 
-n = 365*1 #number of days/years we want to simulate. 
+n = 365*1 #number of days/years we want to simulate.
 x = 25 #number of diffirent simulations
 f = 24 #factor, increases or decreases density
 
 csvFile = 'CSV/28_10_2018/market-price.csv'
-currentPrice = 6403.35
 
 savePlot = True #Save plot as image in working dir, True by default
 imgName = "" #leave blank for time
-imgFormat = ".png" #.png .jpeg .jpg .pdf .raw 
+imgFormat = ".png" #.png .jpeg .jpg .pdf .raw
 
 
 #Verbose false is default, true for iterative messages (will slow down)
@@ -27,6 +27,19 @@ try:
 		v = False
 except:
 	v = False
+
+def getBitcoinPrice():
+	data = requests.get('https://api.coindesk.com/v1/bpi/currentprice.json').json()
+	try:
+		price = data['bpi']['USD']['rate_float']
+	except:
+		if(v == True): print("Coindesk API price look up failed")
+		print("Please enter current bitcoin price: ", end='', flush=True)
+		price = float(input())
+
+	return price
+
+currentPrice = getBitcoinPrice()
 
 def getTrueBitcoinPriceChange():
 	truePrice = []
@@ -42,7 +55,7 @@ def getTrueBitcoinPriceChange():
 				if(int(currPrice) <= 25000):
 					truePrice.append(int(currPrice))
 					truePercentualChangeArr.append(abs((truePrice[-1]-currPrice)/100))
-			avrgPercentualChange = abs(sum(truePercentualChangeArr)/len(truePercentualChangeArr))		
+			avrgPercentualChange = abs(sum(truePercentualChangeArr)/len(truePercentualChangeArr))
 	return (avrgPercentualChange/f)
 
 def simulation(currentPrice,s,x):
