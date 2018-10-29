@@ -7,8 +7,9 @@ import matplotlib.pyplot as plt
 import requests
 
 n = 365*1 #number of days/years we want to simulate.
-x = 7 #number of diffirent simulations
+x = 5 #number of diffirent simulations
 f = 24 #factor, increases or decreases density
+dailyChange = 0 #(IN %) 0 is default, will read the csv for past year change 
 
 csvFile = 'CSV/28_10_2018/market-price.csv'
 
@@ -58,7 +59,7 @@ def getTrueBitcoinPriceChange():
 					truePrice.append(int(currPrice))
 					truePercentualChangeArr.append(abs((truePrice[-1]-currPrice)/100))
 			avrgPercentualChange = abs(sum(truePercentualChangeArr)/len(truePercentualChangeArr))
-	return (avrgPercentualChange/f)
+	return (avrgPercentualChange/f) 
 
 def simulation(currentPrice,s,x):
 	currentSim = []
@@ -83,8 +84,11 @@ def plot():
 	plt.show()
 
 
+if(dailyChange == 0):
+	change = round(getTrueBitcoinPriceChange(),6)
+else:
+	change = dailyChange/2400
 
-change = round(getTrueBitcoinPriceChange(),6)
 print("Average % change in the past year:", round((change*f)*100,3))
 for i in range(x):
 	if((i+1)%10==0 or i+1==x):
