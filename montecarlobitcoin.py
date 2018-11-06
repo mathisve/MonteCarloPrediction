@@ -22,8 +22,7 @@ imgFormat = ".png" #.png .jpeg .jpg .pdf .raw
 try:
 	if(sys.argv[1] == '-v'):
 		v = True
-				#run the following for verbose:
-				#python montecarlobitcoin.py -v
+				#run the following for verbose: python montecarlobitcoin.py -v
 	else:
 		v = False
 except:
@@ -32,7 +31,7 @@ except:
 def getCurrencyPrice():
 	try:
 		data = requests.get('https://api.coindesk.com/v1/bpi/currentprice.json').json()
-		price = data['bpi']['USD']['rate_float']
+		price = data['bpi']['USD']['rate_float'] #change this to the cryptocurrency of your liking
 	except:
 		if(v): 
 			print("Coindesk API price look up failed")
@@ -94,6 +93,5 @@ for i in range(x):
 	if((i+1)%10==0 or i+1==x):
 		print("Simulation n: ",i+1)
 	simulation(currentPrice,i,x)
-
 
 plot()
