@@ -41,7 +41,7 @@ def getCurrencyPrice():
 			price = 6000
 	return price
 
-currentPrice = getCurrncyPrice()
+currentPrice = getCurrencyPrice()
 
 def getTrueCurrencyPriceChange():
 	truePrice = []
@@ -67,6 +67,7 @@ def simulation(currentPrice,s,x):
 			print("Simulation {} of {}. Day {} of {}".format(s+1,x,i+1,n*f))
 		currentPrice = currentPrice + currentPrice * (random.choice([(change * -1), change]))
 		currentSim.append(currentPrice)
+		#plt.pause(0.0000001)	
 	plt.plot(currentSim)
 
 def plot():
