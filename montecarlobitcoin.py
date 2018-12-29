@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import requests
 
 n = 365*1 #number of days/years we want to simulate.
-x = 5 #number of diffirent simulations
+x = 15 #number of diffirent simulations
 f = 24 #factor, increases or decreases density
 dailyChange = 0 #(IN %) 0 is default, will read the csv for past year change 
 
@@ -67,8 +67,9 @@ def simulation(currentPrice,s,x):
 			print("Simulation {} of {}. Day {} of {}".format(s+1,x,i+1,n*f))
 		currentPrice = currentPrice + currentPrice * (random.choice([(change * -1), change]))
 		currentSim.append(currentPrice)
-		#plt.pause(0.0000001)	
 	plt.plot(currentSim)
+	plt.pause(0.0000001)
+
 
 def plot():
 	plt.title("Possible Asset value with avrg {}% daily change".format(round((change*f)*100,3)))
@@ -81,7 +82,6 @@ def plot():
 			plt.savefig("IMG/" + str(time.strftime("%b_%d_%Y__[%H-%M-%S]")) + imgFormat)
 		else:
 			plt.savefig("IMG/" + imgName + imgFormat)
-	plt.show()
 
 
 if(dailyChange == 0):
@@ -90,9 +90,10 @@ else:
 	change = dailyChange/2400
 
 print("Average % change in the past year:", round((change*f)*100,3))
+plot()
 for i in range(x):
 	if((i+1)%10==0 or i+1==x):
 		print("Simulation n: ",i+1)
 	simulation(currentPrice,i,x)
 
-plot()
+plt.show()
